@@ -4,11 +4,11 @@
 #define BUTTON_PIN 12
 #define LED_PIN 13
 
-#define BUTTON_ON HIGH
-#define BUTTON_OFF LOW
+#define BUTTON_ON LOW
+#define BUTTON_OFF HIGH
 
-#define LED_ON LOW
-#define LED_OFF HIGH
+#define LED_ON HIGH
+#define LED_OFF LOW
 
 void setup()
 {
@@ -22,14 +22,21 @@ void loop()
 {
   if (digitalRead(BUTTON_PIN) == BUTTON_ON)
   {
-      delay(200);
-      if (current_state == LED_OFF)
+      delay(20);
+      if (digitalRead(BUTTON_PIN) == BUTTON_ON)
       {
-        digitalRead(LED_PIN, LED_ON);
-      }
-      else
-      {
-        digitalRead(LED_PIN, LED_OFF);
+        if (current_state == LED_OFF)
+        {
+          digitalWrite(LED_PIN, LED_ON);
+          current_state = LED_ON;
+        }
+        else
+        {
+          digitalWrite(LED_PIN, LED_OFF);
+          current_state = LED_OFF;
+        }
+        
+        while (digitalRead(BUTTON_PIN) == BUTTON_ON);
       }
   }
 }
