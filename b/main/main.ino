@@ -1,7 +1,7 @@
 #include <string.h> 
 #include <stdio.h>
 #include "led.h"
-#include "stdio.h"
+#include "serial.h"
 
 #define LED_PIN 13
 #define LED_ON HIGH

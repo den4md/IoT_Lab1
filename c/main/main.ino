@@ -1,7 +1,7 @@
 #include <stdio.h>
-#include <Keypad.h>
-#include <LiquidCrystal.h>
 
+#include "lcd.h"
+#include "keypad.h"
 #include "led.h"
 
 #define RED_LED_PIN A0
@@ -46,8 +46,8 @@ char keys[ROW_NUM][COLUMN_NUM] = {
 //  0b00000
 //};
 
-Keypad *keypad = NULL;
-LiquidCrystal *lcd = NULL;
+//Keypad *keypad = NULL;
+//LiquidCrystal *lcd = NULL;
 
 char* string = new char[STRING_LEN];
 int pos_x = 0;
@@ -63,41 +63,12 @@ void clear_string()
   }
 }
 
-void clear_lcd(const char* fill_char = " ")
-{
-  for (int i = 0; i < LCD_Y; ++i)
-  {
-    lcd->setCursor(0, i);
-    for (int j = 0; j < LCD_X; ++j)
-    {
-      printf(fill_char);
-    }
-  }
-  lcd->setCursor(0, 0);
-  pos_x = 0;
-  pos_y = 0;
-}
-
 void reset()
 {
   clear_lcd();
+  pos_x = 0;
+  pos_y = 0;
   clear_string();
-}
-
-void lcd_put_char(char ch, FILE *f)
-{
-  lcd->print(ch);
-  return ch;
-}
-
-void keypad_get_char(FILE *f)
-{
-  char key;
-  do
-  {
-    key = keypad->getKey();
-  }while (key == 0);
-  return key;
 }
 
 bool check_answer()
@@ -128,8 +99,9 @@ void keypadEvent(KeypadEvent key);
 void setup()
 {
   keypad = new Keypad(makeKeymap(keys), pin_rows, pin_column, ROW_NUM, COLUMN_NUM);
+  begin_keypad(keypad);
   lcd = new LiquidCrystal(RS, EN, D4, D5, D6, D7);
-  lcd->begin(16, 2);  
+  begin_lcd(lcd, 16, 2);
   FILE* stream = fdevopen(lcd_put_char, keypad_get_char);
   stderr = stdout = stdin = stream;
 
@@ -177,8 +149,6 @@ void delete_char()
   printf(" ");
   lcd->setCursor(pos_x, pos_y);
   
-  
-  
 //  clear_lcd();
 //  
 //  while (string[((pos_y) * LCD_Y) + pos_x] != '\0' && ((pos_x + 1) * (pos_y + 1) < STRING_LEN + 1))
@@ -193,7 +163,6 @@ void delete_char()
 //    ++pos_x;
 //  }
 }
-
 
 void keypadEvent(KeypadEvent key)
 {
@@ -229,7 +198,7 @@ void loop()
       wrong_answer();
     }
   }
-  else if ((pos_x + 1) * (pos_y + 1) < STRING_LEN + 1)
+  else if ((pos_x + 1) * (pos_y + 1) < STRING_LEN + 1)  // Добавление символа (если есть свободное место)
   {
     if (pos_x >= LCD_X)
     {

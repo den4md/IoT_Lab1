@@ -16,14 +16,20 @@ void setup()
   LedInit(LED_PIN);
 }
 
+int current_state = LED_OFF;
+
 void loop()
 {
   if (digitalRead(BUTTON_PIN) == BUTTON_ON)
   {
-      digitalWrite(LED_PIN, LED_ON);
-  }
-  else
-  {
-    digitalWrite(LED_PIN, LED_OFF);
+      delay(200);
+      if (current_state == LED_OFF)
+      {
+        digitalRead(LED_PIN, LED_ON);
+      }
+      else
+      {
+        digitalRead(LED_PIN, LED_OFF);
+      }
   }
 }
