@@ -1,0 +1,28 @@
+
+Lab 1. Interacțiunea cu utilizatorul
+Definire problema
+sa se proiecteze o apliatie in baza de MCU care ar schimba starea unui LED la detectarea apasarii unui buton
+-------------------------------
+sa se proiecteze o aplicate in baza de MCU care ar receptiona comenzi de la terminal prin interfata seriala pentru a seta starea unui LED.
+-  led on pentru aprindere si led off pentru stingere., sistemul trebuie sa raspunda cu mesaje text despre confirmarea comenzii
+- pentru schimbul de text prin terminal a se utiliza libraia STDIO
+-------------------------------
+sa se proiecteze o aplicatie in baza de MCU pentru detectarea unui cod de la o tastarura 4x4, sa verifice codul si sa afisese mesaj la un LCD. 
+- pentru cod valid sa se aprinda un led de culoare verde, pentru cod invalid, un led de culoare rosie.	
+- A se utiliza STDIO pentru scanarea tastaturii si afisare la LCD.
+Recomandari
+se recomanda utilizarea unui IDE cu suport arduino, care permite lucrul cu mai multe fisiere. de exemplu Eclipse
+pentru Validare se recomanda utilizarea unui simulator, de ex Proteus.
+functionalitatile pentru fiecare echipament periferic ( led, buton, lcd, keypad) sa fie realizate in fisiere separate, in scop de reutilizare in lucrarile urmatoare
+utilizarea regulilor de codare magic number si CamelCase
+
+Pontaj
+a - max  nota 7
+a+b - max nota 8
+a+b+c max nota 9
+simulare pe circuit real - max nota 10
+
+ Penalizari
+-1 - penalizare pentru NE utilizarea STDIO
+-1 - penalizare pentru fiecare saptamana intarziere de la deadline
+-1 - penalizare pentru nerespectare format raport

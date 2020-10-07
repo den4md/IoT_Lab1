@@ -101,7 +101,7 @@ void setup()
   keypad = new Keypad(makeKeymap(keys), pin_rows, pin_column, ROW_NUM, COLUMN_NUM);
   begin_keypad(keypad);
   lcd = new LiquidCrystal(RS, EN, D4, D5, D6, D7);
-  begin_lcd(lcd, 16, 2);
+  begin_lcd(lcd, LCD_X, LCD_Y);
   FILE* stream = fdevopen(lcd_put_char, keypad_get_char);
   stderr = stdout = stdin = stream;
 
