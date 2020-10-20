@@ -14,7 +14,7 @@
 #define BUTTON_PRESSED_OR_NOISE 1
 #define BUTTON_HOLD 2
 
-#define NOISE_VERIFY_DELAY_MS 100
+#define NOISE_VERIFY_DELAY_MS 50
 
 int led_current_state = LED_OFF;
 int button_current_state = BUTTON_IDLE;

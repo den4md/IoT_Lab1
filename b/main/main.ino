@@ -27,7 +27,7 @@ void setup()
 
 void scan_newline()
 {
-  //printf("\r-start scan\r");
+  //printf("\r\n-start scan\r\n");
   for(helping_index = 0; helping_index < 256; ++helping_index)
   {
     last_word[helping_index] = '\0';
@@ -38,9 +38,10 @@ void scan_newline()
   
   helping_index = 0;
   scanf("%c", &c);
-  while ((c != '\r') && (helping_index < 256))
+  while ((c != '\n') && (c != '\r') && (helping_index < 256))
   {
-    //printf("\r----------------------------\r");
+    printf("%c", c);
+    //printf("\r\n----------------------------\r\n");
     if (c == 8)
     {
       if (helping_index != 0)
@@ -55,7 +56,8 @@ void scan_newline()
     ++helping_index;
     scanf("%c", &c);
   }
-  //printf("\r-stopped scan\r");
+  printf("\r\n");
+  //printf("\r\n-stopped scan\r\n");
 }
 
 void beautify()
@@ -76,7 +78,7 @@ void beautify()
 
 void loop()
 {
-  //printf("\r-in loop\r");
+  //printf("\r\n-in loop\r\n");
   printf("@: ");
   scan_newline();
   //printf(last_word);
@@ -85,31 +87,31 @@ void loop()
   {
     if (current_state == LED_ON)
     {
-      printf("<System>: LED is already on\r");
+      printf("<System>: LED is already on\r\n");
     }
     else
     {
       digitalWrite(LED_PIN, LED_ON);
       current_state = LED_ON;
-      printf("<System>: Turned LED on\r");
+      printf("<System>: Turned LED on\r\n");
     }
   }
   else if (strcmp(last_word, COMMAND_OFF) == 0)
   {
     if (current_state == LED_OFF)
     {
-      printf("<System>: LED is already off\r");
+      printf("<System>: LED is already off\r\n");
     }
     else
     {
       digitalWrite(LED_PIN, LED_OFF);
       current_state = LED_OFF;
-      printf("<System>: Turned LED off\r");
+      printf("<System>: Turned LED off\r\n");
     }
   }
   else
   {
-      printf("<System>: Unknown command!\r");
+      printf("<System>: Unknown command!\r\n");
   }
-  //printf("\r-out loop\r");
+  //printf("\r\n-out loop\r\n");
 }
